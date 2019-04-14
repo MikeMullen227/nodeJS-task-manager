@@ -92,10 +92,38 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
     //     console.log(task)
     // })
 
-    db.collection('tasks').find({completed: false}).toArray((error, task) => {
-        console.log(task)
+    // db.collection('tasks').find({completed: false}).toArray((error, task) => {
+    //     console.log(task)
+    // })
+
+
+    // UPDATE
+    // db.collection('users').updateOne({
+    //     _id: new ObjectID("5cb0f9e56b54fa6351c494a9")
+    // }, {
+    //     // $set: {
+    //     //     name: 'Mike'
+    //     // }
+    //     $inc: {
+    //         age: 1
+    //     }
+    // }).then((result) => {
+    //     console.log(result)
+    // }).catch((error) => {
+    //     console.log(error)
+    // })
+
+
+    db.collection('tasks').updateMany({
+        completed: false
+    }, {
+        $set: {
+            completed: true
+        }
+    }).then((result) => {
+        console.log(result)
+    }).catch((error) => {
+        console.log(error)
     })
-
-
 
 })

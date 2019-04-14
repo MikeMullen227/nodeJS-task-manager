@@ -5,7 +5,10 @@
 // const ObjectID = mongodb.ObjectID;
 
 // destructured version of above 
-const {MongoClient, ObjectID} = require('mongodb');
+const {
+    MongoClient,
+    ObjectID
+} = require('mongodb');
 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager';
@@ -16,8 +19,10 @@ const databaseName = 'task-manager';
 // console.log(id.id.length)
 // console.log(id.toHexString().length)
 
-MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
-    if(error) {
+MongoClient.connect(connectionURL, {
+    useNewUrlParser: true
+}, (error, client) => {
+    if (error) {
         return console.log('unable to connect to database')
     }
     const db = client.db(databaseName)
@@ -35,7 +40,7 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
     //     }
     //     console.log(result.ops);
     // })
-    
+
     //insert multiple users
     // db.collection('users').insertMany([
     //     {
@@ -50,7 +55,7 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
     //     if(error) {
     //         return console.log('Unable to insert documents')
     //     }
-        // console.log(result.ops)
+    // console.log(result.ops)
     // })
 
     // db.collection('tasks').insertMany([
@@ -66,7 +71,7 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
     //         description: 'walk dog',
     //         completed: true
     //     }
-     
+
     // ], (error, result) => {
     //     if(error) {
     //         return console.log('Unable to insert tasks.')
@@ -74,7 +79,7 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
     //     console.log(result.ops)
     // })
 
-    
+
 
     // READ
     // db.collection('users').findOne({_id: new ObjectID("5cb2838ccb78e2fe730da930")}, (error, user) => {
@@ -114,12 +119,30 @@ MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
     // })
 
 
-    db.collection('tasks').updateMany({
-        completed: false
-    }, {
-        $set: {
-            completed: true
-        }
+    // db.collection('tasks').updateMany({
+    //     completed: false
+    // }, {
+    //     $set: {
+    //         completed: true
+    //     }
+    // }).then((result) => {
+    //     console.log(result)
+    // }).catch((error) => {
+    //     console.log(error)
+    // })
+
+    // DELETE
+    db.collection('users').deleteMany({
+        age: 28
+    }).then((result) => {
+        console.log(result)
+    }).catch((error) => {
+        console.log(error)
+    })
+
+
+    db.collection('tasks').deleteOne({
+        description: "dishes"
     }).then((result) => {
         console.log(result)
     }).catch((error) => {
